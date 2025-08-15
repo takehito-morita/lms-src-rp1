@@ -3,6 +3,7 @@ package jp.co.sss.lms.util;
 public interface Constants {
 
 	// errors.propertyのリソースキー
+	public static final String VALID_KEY_MISSING_ATTENDANCE = "missing.attendance";
 	public static final String VALID_KEY_INVALID = "invalid";
 	public static final String VALID_KEY_MAXLENGTH = "maxlength";
 	public static final String VALID_KEY_MINLENGTH = "minlength";

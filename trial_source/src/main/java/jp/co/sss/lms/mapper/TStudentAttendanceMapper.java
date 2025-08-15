@@ -16,6 +16,14 @@ import jp.co.sss.lms.entity.TStudentAttendance;
  */
 @Mapper
 public interface TStudentAttendanceMapper {
+	
+	/**
+	 * 勤怠情報（受講生入力）取得（LMSユーザーID）
+	 * 
+	 * @param trainingDate
+	 * @return 勤怠情報（受講生入力）エンティティ
+	 */
+	Integer findByLmsErrorMS(@Param("trainingDate") Date trainingDate);
 
 	/**
 	 * 勤怠情報（受講生入力）取得（LMSユーザーID）
@@ -35,7 +43,8 @@ public interface TStudentAttendanceMapper {
 	 * @param deleteFlg
 	 * @return 勤怠情報（受講生入力）エンティティ
 	 */
-	TStudentAttendance findByLmsUserIdAndTrainingDate(@Param("lmsUserId") Integer lmsUserId,
+	TStudentAttendance findByLmsUserIdAndTrainingDate(
+			@Param("lmsUserId") Integer lmsUserId,
 			@Param("trainingDate") Date trainingDate, @Param("deleteFlg") Short deleteFlg);
 
 	/**

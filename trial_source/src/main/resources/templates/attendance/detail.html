@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	th:replace="~{/common/layout :: layout(~{::title},~{::body/content()})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/common/layout :: layout(~{::title},~{::body/content()})}">
+
 <head>
-<meta charset="UTF-8">
-<title>勤怠情報変更｜LMS</title>
+	<meta charset="UTF-8">
+	<title>勤怠情報変更｜LMS</title>
 </head>
+
 <body>
 
 	<!-- 完了メッセージ -->
@@ -16,6 +17,20 @@
 			<span>[[${message}]]</span>
 		</div>
 	</th:block>
+	
+	<!-- 出退勤のポップアップ -->
+	<div id="missingAttendance" th:text="${missingAttendance}" != null style="display: none;"></div>
+<!--	cssでdisplay: none;を使ったら画面表示させた際に画面が切り替わりポップアップが出るが、-->
+<!--	divタグ内にstyleとしてそのまま書くと画面が切り替わらずにポップアップが出る-->
+
+	<script>
+		window.addEventListener('DOMContentLoaded', () => {
+			const message = document.getElementById('missingAttendance').textContent.trim();
+			if (message) {
+				alert(message); // ポップアップ表示
+			}
+		});
+	</script>
 
 	<h2>勤怠管理</h2>
 
@@ -57,7 +72,8 @@
 				</thead>
 
 				<tbody class="db">
-					<th:block th:each="attendanceManagementDto : ${attendanceManagementDtoList}" th:object="${attendanceManagementDto}">
+					<th:block th:each="attendanceManagementDto : ${attendanceManagementDtoList}"
+						th:object="${attendanceManagementDto}">
 						<tr>
 							<td class="w160">[[*{#dates.format(trainingDate, 'yyyy年M月d日(E)')}]]</td>
 							<td class="w260">[[*{sectionName}]]</td>
@@ -74,14 +90,14 @@
 	</div>
 
 	<script type="text/javascript" th:inline="javascript">
-		$(function() {
+		$(function () {
 			$("#now").text('現在の時刻は　' + getClock() + '　です。');
-			setInterval(function() {
+			setInterval(function () {
 				$("#now").text('現在の時刻は　' + getClock() + '　です。');
 			}, 1000);
 		});
 		function getClock() {
-			const today =  new Date();
+			const today = new Date();
 			const hours = ('0' + today.getHours()).slice(-2);
 			const minutes = ('0' + today.getMinutes()).slice(-2);
 			return hours + ':' + minutes;
@@ -89,4 +105,5 @@
 	</script>
 
 </body>
+
 </html>

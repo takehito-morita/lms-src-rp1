@@ -42,6 +42,15 @@ public class AttendanceController {
 	@RequestMapping(path = "/detail", method = RequestMethod.GET)
 	public String index(Model model) {
 
+		// 更新前のチェック
+		String error = studentAttendanceService.missingAttendance();
+		model.addAttribute("missingAttendance", error);
+		// 勤怠登録
+		if (error == null) {
+			String message = studentAttendanceService.setPunchIn();
+			model.addAttribute("message", message);
+		}
+
 		// 勤怠一覧の取得
 		List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());

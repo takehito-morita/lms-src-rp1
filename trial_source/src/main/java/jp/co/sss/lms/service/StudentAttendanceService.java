@@ -74,6 +74,27 @@ public class StudentAttendanceService {
 	}
 
 	/**
+	 * 出退勤が過去日に入力されているかのチェック
+	 * 
+	 * @return エラーメッセージ
+	 */
+	public String missingAttendance() {
+		Date trainingDate = attendanceUtil.getTrainingDate();
+
+		// 登録情報チェック
+		int tStudentAttendance = tStudentAttendanceMapper
+				.findByLmsErrorMS(trainingDate);
+		System.out.println(tStudentAttendance + ":::::::::::::::::::::::::");
+
+		if (tStudentAttendance > 0) {
+			// 過去日の勤怠に未入力があります。
+			return messageUtil.getMessage(Constants.VALID_KEY_MISSING_ATTENDANCE);
+		}
+
+		return null;
+	}
+
+	/**
 	 * 出退勤更新前のチェック
 	 * 
 	 * @param attendanceType
