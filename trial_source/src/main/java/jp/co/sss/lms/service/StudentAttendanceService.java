@@ -240,6 +240,10 @@ public class StudentAttendanceService {
 		attendanceForm.setUserName(loginUserDto.getUserName());
 		attendanceForm.setLeaveFlg(loginUserDto.getLeaveFlg());
 		attendanceForm.setBlankTimes(attendanceUtil.setBlankTime());
+		// attendanceForm でsetBlankTimesを呼び出しているのかわかんない
+		// 理由：AttendanceFormクラスではblankTimesとしか書かれてなく、setBlankTimesとは書かれてないから。
+		
+		System.out.println("★★★★★★★★★★★★" + loginUserDto.getLmsUserId() + " | " + loginUserDto.getUserName());
 
 		// 途中退校している場合のみ設定
 		if (loginUserDto.getLeaveDate() != null) {
@@ -277,6 +281,42 @@ public class StudentAttendanceService {
 
 		return attendanceForm;
 	}
+	
+	/**
+	 * 00∼24時の設定
+	 * 
+	 * @param attendanceManagementDtoList
+	 * @return 勤怠編集フォーム
+	 */
+	public AttendanceForm hour(
+			List<AttendanceManagementDto> attendanceManagementDtoList) {
+
+		AttendanceForm attendanceForm = new AttendanceForm();
+		attendanceForm.setBlankTimes(attendanceUtil.hour());
+
+		return attendanceForm;
+	}
+	
+	/**
+	 * 00∼59分の設定
+	 * 
+	 * @param attendanceManagementDtoList
+	 * @return 勤怠編集フォーム
+	 */
+	public AttendanceForm minute(
+			List<AttendanceManagementDto> attendanceManagementDtoList) {
+
+		AttendanceForm attendanceForm = new AttendanceForm();
+		attendanceForm.setBlankTimes(attendanceUtil.minute());
+
+		return attendanceForm;
+	}
+//	public String minute() {
+//
+//		String a = attendanceUtil.minute();
+//
+//		return a;
+//	}
 
 	/**
 	 * 勤怠登録・更新処理

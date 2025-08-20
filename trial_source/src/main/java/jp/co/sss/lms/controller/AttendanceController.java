@@ -125,6 +125,18 @@ public class AttendanceController {
 		AttendanceForm attendanceForm = studentAttendanceService
 				.setAttendanceForm(attendanceManagementDtoList);
 		model.addAttribute("attendanceForm", attendanceForm);
+		
+		// 00∼24時の作成
+		AttendanceForm hour = studentAttendanceService
+				.hour(attendanceManagementDtoList);
+		model.addAttribute("hour", hour);
+		
+		// 00∼59分の作成
+		AttendanceForm minute = studentAttendanceService
+				.minute(attendanceManagementDtoList);
+		model.addAttribute("minute", minute);
+//		String minute = studentAttendanceService.minute();
+//		model.addAttribute("minute", minute);
 
 		return "attendance/update";
 	}

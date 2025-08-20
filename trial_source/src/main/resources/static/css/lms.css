@@ -1,5 +1,17 @@
 @charset "utf-8";
 
+.attendance-row {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* 要素間のスペース */
+}
+
+.wit {
+	width: 70px;
+	height: 40px;
+}
+
+
 table form, .ib {
 	display: inline-block;
 }
